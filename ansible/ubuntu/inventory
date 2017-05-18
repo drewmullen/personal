@@ -1,5 +1,5 @@
 [control]
-localhost
+127.0.0.1 name=control ansible_connection=local
 
 [webserver]
 app01
