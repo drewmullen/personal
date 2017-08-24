@@ -1,0 +1,91 @@
+Creating a repo
+createrepo [dir with rpms]
+reference man yum.conf examples to create name.repo in /etc/yum.repos.d/name.repo
+
+Boot interupts
+systemd.unit=rescue.target
+
+Reset Root PW
+rd.break
+mount -o remount,rw /sysroot
+chroot /sysroot
+passwd
+touch .autorelabel
+
+Grub changes
+make changes in /etc/default/grub
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+Apache Settings location
+/etc/httpd/conf/httpd.conf
+/var/www/htdocs (or w/e is inside httpd.conf)
+
+Yum Commands and needed tools
+yum groups install "X Window System" "GNOME" "Directory Client"
+yum install "cifs-util samba-client"
+yum provides */[search critera]
+
+Switch to GUI
+systemd.unit=graphical.target
+systemctl set-default graphical.target
+systemctl isolate graphical.target
+
+Users
+
+Shaping the new user home dir
+create files or dirs in /etc/skel
+
+User properties
+usermod
+chage
+
+find --help
+find / -name drew.txt
+
+SMB share to fstab
+//domain/shared_dir /mnt_point cifs _netdev,username=drew,password=password 0 0
+
+NFS Share to fstab
+FQDN.example.com:/data /mnt_point nfs _netdev 0 0
+
+Hostname
+systemctl set-hostname [new hostname]
+
+Creating a shared user env
+SUID u+s on a file
+SGID g+s on a dir
+sticky +t on a dir
+
+ACLs (useful for when you have multiple "owners" (not real owners but similar behavior) and for creating permissions on future files)
+setfacl -R -m g:group_name:rwx directory
+setfacl -m d:g:group_name:rwx directory
+setfacl -m o::- import  <-- remove all permissions for others
+
+Automount for ldap dirs
+create new entry in /etc/auto.master (reference line with misc)
+create new file auto.[yourname]
+* -rw ldap_domain:/ldap_dir/&
+
+SELinux
+toggle on/off /etc/sysconfig/selinux
+reference examples in man pages
+man semanage-fcontext semanage-port sepolicy-manpages
+setenforce
+look for log file errors in /var/log/messages grep sealert
+
+Increase swap size
+fdisk <-- create new partition, type swap
+mkswap /dev/sda#
+swapon /dev/sda# to test
+swapoff /dev/sda#
+fstab: /dev/sda# swap swap default 0 0
+swapon -a <-- tests fstab
+
+LDAP
+authconfig-gtk
+for ldap url labipa.example.com
+dc=com,dc=example
+
+Firewall
+firewall-config
+
