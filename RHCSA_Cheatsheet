@@ -89,3 +89,9 @@ dc=com,dc=example
 Firewall
 firewall-config
 
+kernel modules
+lsmod 
+modinfo
+modprobe
+/etc/modprobe.d/*.conf <-- create new module changes, example references by cat existing *.conf
+
