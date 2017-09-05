@@ -15,7 +15,7 @@ def str_eval(new_item):
         print("DONE to quit, HELP for help, SHOW for current list")
     else:
         add_to_list(new_item)
-        
+
 def add_to_list(new_item):
     #else append word to list
     shopping_list.append(new_item)
