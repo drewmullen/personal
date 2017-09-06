@@ -3,9 +3,23 @@
 Number Game Intro
 import <python standard library>
 
-random.randint(1,10) #generates a # between 1 and 10
+#generates a # between 1 and 10
+random.randint(1,10)
 
-while True:
-  guess = int(input("guess a number between 1 and 10: "))
+#makes a string into a list
+list(<string>)
 
-  if guess == secret_num:
+#add a single item to a list
+mylist.append(<item>)
+
+#add multiple items to a list
+mylist.extend(<[1,2,3]>) or ("me" * 5)
+
+#split a string by spaces (or separators)
+string.split() or string.split(', ')
+
+#turn a list into a string ex: comma separated
+', '.join(<list>)
+
+#list / string indexs
+string.index('<>') ex: string = 'abc'; string.index('a') returns 0

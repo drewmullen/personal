@@ -1,33 +1,29 @@
 import random
 #pick a random word from a list
 #user guesses letters in the word
-list = ['one','two','three']
+word_list = ['one','two','three']
 
 def main():
-    secret_word = list[random.randint(1,2)]
-    correct_guesses = []
-    i=0
+    #select word from word_list, set to lowercase, and add it as a list
+    secret_word = []
+    secret_word = list(word_list[random.randint(1,2)].lower())
+
     #build list with _s
-    while i < len(secret_word):
-        correct_guesses.append('_')
-        i+=1
+    correct_guesses = []
+    correct_guesses.extend('_' * len(secret_word))
 
-#compare lists and print correct_guesses list
-while letter in secret_word
-    if secret_word[letter] == correct_guesses[letter]:
-        print("yes")
-    else:
-        print("no")
+#accept input
+def prompt():
+    guess = input("Enter a guess: ").lower()
+    return guess
 
+#compare input to secret word
+def compare_prompt(secret_word, guess):
+    for letter in secret_word:
+        if guess == letter:
+            #add letter to correct spot in status list by finding the index location in secret word
+            correct_guesses[int(secret_word.index(letter))] = guess
+            #find index of letter in secret_word and make correct_guesses correlating index the guess
 
-#print(*correct_guesses)
-
-
-#status()
-
-#let user guess a letter
-#evaluate whether letter is in the word
-#if it is, output the # of letters guessed correctly - total length
-
-
-#def status()
+#output status
+    #print(*correct_guesses)
