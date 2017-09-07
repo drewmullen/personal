@@ -9,18 +9,17 @@ def setup():
     secret_word = []
     secret_word = list(word_list[random.randint(0,(len(word_list)-1))].lower())
 
-    #build list with _s
+    #build progress tracking list with _s
     correct_guesses = []
     correct_guesses.extend('_' * len(secret_word))
     game(secret_word, correct_guesses)
 
 def prompt():
     # prompts user for input and makes sure its only 1 character
-
     guess = input("Enter a guess: ").lower()
     if len(guess) != 1:
         print("One character only, please!")
-        prompt()
+        return None
     else:
         return guess
 
@@ -41,6 +40,7 @@ def compare_prompt(secret_word, guess, correct_guesses):
         print("You got {}!".format(found))
     else:
         print("None of those, try again!")
+        #print(guess)
 
 
 def output_status(correct_guesses):
@@ -48,12 +48,15 @@ def output_status(correct_guesses):
     print(*correct_guesses)
 
 def game(secret_word, correct_guesses):
-    # main function that controls flow of game
+    # main function that controls flow of game and monitors for a win
+    # counter tracks the amount of guesses and reports to user at the end
 
     counter=0
     while correct_guesses!= secret_word:
         output_status(correct_guesses)
         guess = prompt()
+        if guess == None:
+            guess = prompt()
         compare_prompt(secret_word, guess, correct_guesses)
         counter+=1
     print("You won! It took you {} guesses.".format(counter))
