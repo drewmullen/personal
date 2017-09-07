@@ -5,7 +5,7 @@ def setup():
     word_list = ['one','two','three']
     #select word from word_list, set to lowercase, and add it as a list
     secret_word = []
-    secret_word = list(word_list[random.randint(0,2)].lower())
+    secret_word = list(word_list[random.randint(0,len(word_list))].lower())
 
     #build list with _s
     correct_guesses = []
@@ -18,7 +18,8 @@ def prompt():
     if len(guess) != 1:
         print("One character only, please!")
         prompt()
-    return guess
+    else:
+        return guess
 
 #compare input to secret word
 def compare_prompt(secret_word, guess, correct_guesses):
