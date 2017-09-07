@@ -24,14 +24,15 @@ def prompt():
 #compare input to secret word
 def compare_prompt(secret_word, guess, correct_guesses):
     counter = 0
+    found = 0
     for letter in secret_word:
         if guess == letter:
             #add letter to correct spot in status list by finding the index location in secret word
             correct_guesses[counter] = guess
-            #int(secret_word.index(letter)) <-- buggy, only finds 1st occurence even if there are 2
-            print("You got one!")
+            found +=1
         counter +=1
-
+    if found > 0:
+        print("You got {}!".format(found))
 
 
 #output status
