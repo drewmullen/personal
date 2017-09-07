@@ -2,10 +2,10 @@ import random
 
 
 def setup():
-    word_list = ['one','two','three']
+    word_list = ['one','two','three', 'teest']
     #select word from word_list, set to lowercase, and add it as a list
     secret_word = []
-    secret_word = list(word_list[random.randint(0,len(word_list))].lower())
+    secret_word = list(word_list[random.randint(0,(len(word_list)-1))].lower())
 
     #build list with _s
     correct_guesses = []
