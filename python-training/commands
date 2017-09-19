@@ -23,3 +23,12 @@ string.split() or string.split(', ')
 
 #list / string indexs
 string.index('<>') ex: string = 'abc'; string.index('a') returns 0
+
+#returns True if var is and alpha
+str.isalpha()
+
+#def clear():
+#    if os.name == 'nt':
+#        os.system('cls')
+#    else:
+#        os.system('clear')

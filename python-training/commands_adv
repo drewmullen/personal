@@ -1,0 +1,21 @@
+#containers (iterable)
+lists - mutable, can be changed without assigning it to a new space in memory
+strings - immutable, cannot be changed without assigning it to a new space in memory
+
+lists *continued
+`.extend()`, `.append()`, and `.insert()`
+list.append('new item in list')
+or list + ['new item in list'] #temporary addition
+list += ['new item in list'] #permanent addition
+
+# removing items from a list
+del list[-1] #delete last item in list
+list.remove(#) #removes the first iteration of #
+del list[#] # removes all iterations of #
+
+extend lets you add multiple items to a list
+list.extend(["item 1", "item 2"])
+
+list.insert(1, "this item is now in index 1")
+
+#collections

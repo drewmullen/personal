@@ -1,0 +1,10 @@
+var types:
+host vars
+facts
+dynamic
+
+remote execution
+python package sent to host, executed locally and JSON values returned
+
+local execution
+used when host cannot execute python
