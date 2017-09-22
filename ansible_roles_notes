@@ -1,0 +1,94 @@
+Abstract and refactor playbooks
+
+creates predefined structure to maintain aspects of your builds
+
+1. create directory structures:
+- site.yml
+- ansible.cfg
+- inventory
+- webserver.yml
+- roles
+-- role_names ("webserver")
+---- tasks
+------ main.yml
+---- handlers
+------ main.yml
+---- vars
+------ main.yml
+---- templates
+------ main.yml
+
+  tasks - main.yml
+  ---
+  - name: ensure apache is installed
+    yum: name=httpd state=present
+
+  - name: Start Apache
+    service: name=httpd state=started enabled=yes
+
+  - name: deploy config files
+    template: src=httpd.j2 dest=/etc/httpd/conf/httpd.conf
+    notify:
+    - Restart Apache
+
+vars - main.yml
+---
+http_port: 80
+doc_dir: /ansible
+doc_root: /var/www/html/ansible
+max_client: 5
+
+handlers - main.yml
+---
+- name: Restart Apache
+  service: name=httpd state=restarted
+
+site.yml
+---
+- hosts: webserver:dbserver
+  sudo: yes
+  gather_facts: no
+  roles:
+    - server-common
+- include: webserver.yml
+- include: dbserver.yml
+
+
+site.yml
+---
+  - include: webserver.yml tags=web
+
+tagging tasks
+tasks:
+  debug: msg="this will only run on tag 'debug'"
+  tags:
+    - debug
+
+implment roles
+
+---
+- hosts: code-dev
+  roles:
+    - server-common
+    - builders
+  gather_facts: no
+
+  tasks:
+    # any extra tasks for this playbook
+
+pre_tasks & post_tasks
+# example: removing server from LB and re-adding after
+# disable monitoring and re-enabling
+
+---
+- hosts: webservers
+  pre_tasks:
+    - #remove from load balancer
+  roles:
+    - server-common
+    - jboss
+  post_tasks:
+    - #add to load balancer
+
+execute roles
+ansible-playbook site.yml -tags "web" -limit atlanta

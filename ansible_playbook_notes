@@ -1,0 +1,112 @@
+plays map hosts to tasks
+a play can have multiple tasks
+a playbook can have multiple plays
+
+Global Play Declaration area example
+- hosts: <>
+  < >
+  vars:
+    git_repo: <>
+    http_port: 8080
+  gather_facts: no #saves time in executions
+  tasks:
+    - name: <>
+      <>
+
+retry file creation location can be changed in ansible.cfg
+purpose: instead of running full playbook, just use:
+ansible-playbook ... --limit @~/playbooks/ping.retry
+
+including files
+# include other files (plays, var files)
+tasks:
+  - include: webserver.yml
+    vars:
+      sitename: my awesome site
+  - include: loadbalancer.yml
+  - include_vars: variables.yml
+
+Using task output in a play
+# initializes output to a var. often used to determine success of prev. tasks
+
+tasks:
+  - shell: /usr/bin/whoami
+    register: username
+  - file: path=/home/myfile.txt
+          owner={{ username }}
+
+Debug module
+# sends output to screen during execution
+# can take 2 parameters
+  # msg to output a message during exec
+  # var to output result of a var
+tasks:
+  - debug: msg="This host is {{ inventory_hostname }} during execution"
+  - shell: /usr/bin/whoami
+    register: username
+  - debug: var=username
+
+Prompt module, prompt user for input during exec
+# creates dynamic playbooks
+# stdout does not report keystrokes (think similar to password field)
+- hosts: web1
+  vars_prompt:
+    - name: "sitename"
+      prompt: "What is the new site's name?"
+
+  tasks:
+    - debug: msg="The name is {{ sitename }}"
+
+Handlers
+# only takes action based on state of tasks
+# handlers execute at the end of the playbook
+# only ever execute once
+# example: only restart a service if the config file was changed
+
+tasks:
+  - copy: src=files/httpd.conf
+          dest=/etc/httpd/conf/
+    notify:
+      - Apache Restart
+handlers:
+  - name: Apache Restart
+    service: name=httpd state=restarted
+
+---------------
+tasks:
+  - yum: name=httpd state=present
+    when: ansible_os_family == "RedHat"
+
+  - apt: name=apache2 state=present
+    when: ansible_os_family == "Debian"
+
+---------------
+# ignore_errors <-- does what it says
+# debug only outputs "Failure!" when the command module doesnt find the path
+tasks:
+  - command: ls /path/doesnt/exist
+    register: result
+    ignore_errors: yes
+
+  - debug: msg="Failure!"
+    when: result|failed
+
+
+Template module
+# users jinja2 engine
+
+tasks:
+  - template:
+      src:templates/httpd.j2
+      dest=/etc/httpd/conf/httpd.conf
+      owner=httpd
+#does substitution for var names in httpd.j2 to httpd.conf, where theyre supposed to be
+#then it copies the file to the destination
+
+#httpd.j2
+
+<VirtualHost *:80>
+ ServerAdmin {{ server_admin }}
+ DocumentRoot {{ site_root }}
+ ServerName {{ inventory_hostname }}
+</VirtualHost>
