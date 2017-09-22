@@ -1,10 +1,86 @@
+ansible docs
+ansible-doc -l #basic help
+ansible-doc <name> #specific module help
+ansible-doc -s <name> playbook examples
+
 var types:
 host vars
 facts
 dynamic
 
-remote execution
-python package sent to host, executed locally and JSON values returned
+remote execution: python package sent to host, executed locally and JSON values returned
 
-local execution
-used when host cannot execute python
+local execution: used when host cannot execute python
+
+command module executes from python binaries
+
+shell module executes a direct shell: can use env vars
+
+ansible <system>
+-i <inventory>
+-m <module> <-- default is command
+-u <username>
+-k <prompt for password>
+-v <debug, -vv)
+--sudo
+
+write a single line command:
+ansible <group/host> -i inventory -m <module> -a <arguements>
+ansible webservers -i ~/inventory -m service -a "name=httpd enabled=yes state=started" --sudo
+
+host/group target patterns
+OR = group1:group2
+NOT = (!group1)
+AND = group1:&group2 == hosts that are in BOTH groups
+ex: webservers:&production or d
+ex2: webservers:&production:!python3
+
+inventory features:
+behavioral parameters: ssh users, passwords, keys, path to a different compiler
+groups:
+groups of groups:
+assign variables:
+multiple files for scaling
+static / dynamic  <- can make inv file into a script that will return
+  data that defines the ansible-actionable inventory file
+  parameters are set inline
+  db1.example.com ansible_ssh_user=aaron ansible_ssh_pass=123
+  db1.example.com ansible_python_interpreter=/usr/bin/python
+
+  [datacenter-west] <-group
+  [datacenter-west:children] <-look up the group of groups
+  db1
+  db2
+  [datacenter-west:vars]
+  ansible_ssh_user=ansible
+  ntp-server=5.6.7.8
+
+variable filesystem
+---
+ntp: ntp-west.example.com
+syslog:logger-west.example.com
+
+vars ---
+create a yml '---'
+mkdir group_vars: all, <group name>
+mkdir host_vars: <host_name>
+
+configuration settings (loads 1st in order)
+1. $ANSIBLE_CONFIG
+2. ./ansible.cfg <-- looks down the tree
+3. ~/.ansible.cfg
+4. /etc/ansible/ansible.cfg
+
+:: ANSIBLE_FORKS <-- sets how many parallel operations ansible executes
+host_key_checking <-- set off for dev envs, to make it easier
+log_path <-- where do you want ansible to log (ensure chmod is set for remote user)
+
+Config options that can be override: docs.ansible.com <- getting started, configuration file
+
+-- can set key checking to no, ping all servers in inventory, then set keychecking to yes, quick way to populate!
+override a config with 'export ANSIBLE_<config name>' ex: export ANSIBLE_HOST_KEY_CHECKING=True
+ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python2.7
+
+investigating setup
+ansible web1 -i inventory -m setup -a "filter=ansible_eth*" #shows ethernet interfaces
+ansible all -i inventory -m setup --tree ./setup
