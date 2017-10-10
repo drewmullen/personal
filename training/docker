@@ -1,0 +1,20 @@
+docker daemon - runs on host, is docker, coordinates running containers, packaging images
+docker client - communicates instructions to the daemon. run commands to spin up new docker containers, monitor existing
+docker registry - provides information and files to the daemon. stores docker images
+
+docker pull nginx
+
+Docker Networking
+
+docker run -p (port) 8080(host):80(container) --detach (runs detached from cli) nginx
+
+docker ps
+
+docker network [inspect network]
+
+docker stop [container id (docker ps)]
+
+docker run -it(interactive)(tty) --detach --name=container1 ubuntu
+
+docker attach container1 (creates an attachment point to host)
+
