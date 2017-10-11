@@ -84,3 +84,6 @@ ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python2.7
 investigating setup
 ansible web1 -i inventory -m setup -a "filter=ansible_eth*" #shows ethernet interfaces
 ansible all -i inventory -m setup --tree ./setup
+
+#  lineinfile
+#    line: 'export PATH=$PATH:path-to-mysql/bin'
