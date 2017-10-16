@@ -7,6 +7,8 @@
 # you're doing.
 Vagrant.configure(2) do |config|
   # setup proxy
+  # dependency: `vagrant plugin install vagrant-proxyconf`
+
     if Vagrant.has_plugin?("vagrant-proxyconf")
       config.proxy.http      = "http://PITC-Zscaler-Americas-Alpharetta3PR.proxy.corporate.ge.com:80"
       config.proxy.https     = "http://PITC-Zscaler-Americas-Alpharetta3PR.proxy.corporate.ge.com:80"

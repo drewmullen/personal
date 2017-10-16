@@ -1,0 +1,91 @@
+# Docker tools
+docker daemon - runs on host, is docker, coordinates running containers, packaging images
+docker client - communicates instructions to the daemon. run commands to spin up new docker containers, monitor existing
+docker registry - provides information and files to the daemon. stores docker images
+
+docker pull nginx
+
+# Docker Networking
+
+docker run -p (port) 8080(host):80(container) --detach (runs detached from cli) nginx
+
+docker ps
+
+docker network [inspect network]
+
+docker stop [container id (docker ps)]
+
+docker run -it(interactive)(tty) --detach --name=container1 ubuntu
+
+docker attach container1 (creates an attachment point to host)
+
+# Building Images
+# creates image
+docker build -t (supply repo: tag) sample-web-app:1.0 python (directory)
+#can exclude ":xyz" docker will tag as 'latest'
+
+
+#create a container
+docker run -p 8080:8080 sample-web-app:1.0
+#Dockerfile instructs EXPOSE 8080, however, the port must still be published
+
+
+# FROM must always be the first line in a Dockerfile
+FROM name:optional-tag
+
+# RUN runs a shell command
+RUN yum update -y
+RUN yum install -y python3
+
+# exec form (JSON)
+RUN ["yum", "update", "-y"]
+
+# ENTRYPOINT sets executable to be run at startup.
+### only 1 per Dockerfile
+ENTRYPOINT ["python3"]
+
+# CMD list of arguments that get passed to entrypoint executable.
+### can also pass entrypoint as 1st argument
+### only 1 per Dockerfile
+CMD ["app.py"]
+
+# Over riding entrypoint / CMD during at start
+original call:  docker run -p 8080:8080 sample-web-app
+alternate call: docker run -p 8080:8080 sample-web-app alternate.py
+
+# WORKDIR specifies default dir. creates if it doesnt exist
+### add, copy auto uses workdir
+### entrypoint / CMD will be run in WORKDIR
+COPY /app (host location) (dest, relative to WORKDIR)
+# will create subsequent dirs within WORKDIR ex:
+WORKDIR /files
+COPY host_file.txt image/path/image_file.txt
+# /files/image/path/image_file.txt
+
+# you can include commands in your RUN call
+docker run (image) ls -lrt
+#will list WORKDIR contents
+
+# ADD does the same as COPY but can also:
+### grab files from a URL
+### unarchive
+
+ADD http://google.com/robots.txt robots.txt
+ADD zyps.tar.gz zyps/
+
+# EXPOSE
+EXPOSE 8080
+
+#ENV - set env variables. space separated.
+## multiple ENV lines OK
+ENV key=value JBOSS_HOME=/app/jboss-as message="this is a message"
+WORKDIR $key
+RUN echo $message > README.txt
+${key} also works. use when var cannot have a space. ex: /dir/${key}/dir3
+
+# USER - runs session as specific user. does not create user
+RUN useradd treehouse
+WORKDIR /app
+RUN chown treehouse:treehouse /app
+USER treehouse
+RUN whoami > whoami.txt

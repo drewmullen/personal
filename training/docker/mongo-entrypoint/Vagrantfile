@@ -1,0 +1,10 @@
+Vagrant.configure("2") do |config|
+  if Vagrant.has_plugin?("vagrant-proxyconf")
+      config.proxy.http      = "http://PITC-Zscaler-Americas-Alpharetta3PR.proxy.corporate.ge.com:80"
+      config.proxy.https     = "http://PITC-Zscaler-Americas-Alpharetta3PR.proxy.corporate.ge.com:80"
+      config.proxy.no_proxy  = "localhost,127.0.0.1"
+    end
+
+  config.vm.box = "williamyeh/centos7-docker"
+  config.vm.box_version = "1.9.1.20151123"
+end
