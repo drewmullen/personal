@@ -1,4 +1,6 @@
-docker commands
+###################
+# docker commands #
+###################
 
 docker build -t <tag-name> .<Dockerfile location>
 
