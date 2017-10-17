@@ -89,3 +89,15 @@ WORKDIR /app
 RUN chown treehouse:treehouse /app
 USER treehouse
 RUN whoami > whoami.txt
+
+## Registries
+
+docker login
+
+# storing images in registry
+## dockerhub requires images start with user name
+docker tag username/<image name>
+docker push username/<image name>
+
+docker pull username/<image name>
+^ then docker run
