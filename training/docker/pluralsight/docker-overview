@@ -1,0 +1,33 @@
+docker machine: provisions docker hosts / engines
+docker compose: compose multi-container apps
+docker swarm: schedule containers over multiple docker engines
+
+Tutum - pretty UI
+
+# stop & remove all containers
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+
+containers stop when they have no running services
+
+How containers are built and work:
+isolated bin / libs
+isolated process tree (PIDs)
+
+kernel Namespaces:
+- user namespace
+- mnt namespace
+- net namespace
+- pid namespace
+
+Control Groups (cgroups):
+groups resources and apply limits
+- tweak cgroup limits to changes resources
+
+Capabilities:
+breaks root privs down to specific privs
+CAP_CHOWN
+CAP_KILL
+CAP_NET_BIND_SERVICE
+
+libcontainer is the replacement for LXC (managed by docker)

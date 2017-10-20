@@ -1,0 +1,32 @@
+# swarm mode theory - native clustering
+docker swarm init --advertise-addr <ip:port> --listen-addr <ip:port>
+2377 is offician swarm port
+# keep track of the token
+docker swarm join-token manager
+docker swarm join-token worker
+
+docker swarm join \
+token... \
+--advertise-addr <> \
+--listen-addr <>
+
+# make a manager the leader
+docker node promote <ID>
+
+managers act as workers
+
+
+## Services
+
+docker service create --name <> -p <8080:8080> --replicas 5 <image name>
+
+docker service ls
+docker service ps <service name>
+docker service scale <service name>=#
+
+
+## Stacks - multiple services
+docker-compose.yml <-- defines services
+
+stack is defined by a DAB (distributed application bundle)
+docker-compose bundle
