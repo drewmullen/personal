@@ -10,3 +10,20 @@ brctl show docker0
 hosts file is overlayed by new files
 
 docker port <container>
+
+-P to assign random high # ports (must expose in Dockerfile)
+
+Linking Containers
+
+src:
+must still expose in DF but not in runtime (-p)
+
+rcvr:
+have to link to src
+
+ex of rcvr:
+docker run --name=<receiver name> --link=<source container>:<alias - nick name> -it ubuntu:latest /bin/bash
+
+src providers rcvr with many env variables:
+<ALIAS_info>
+/etc/hosts <-- <alias IP> <alias name>

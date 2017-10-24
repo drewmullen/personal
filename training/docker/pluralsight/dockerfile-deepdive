@@ -29,14 +29,3 @@ storing data outside the contain to increase persistence and sharing
 docker run -it -v /tmp-vol --name=<> <image>:<tag> <command (/bin/bash)>
 
 docker run -v </host/dir>:</container/dir>
-
-DOCKER LOGGING
-
-debug (all)
-info (info + error + fatal)
-error (error + fatal)
-fatal
-
-stop docker daemon
-
-docker -d -l debug &
