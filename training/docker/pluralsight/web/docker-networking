@@ -1,3 +1,27 @@
+https://github.com/docker/libnetwork/blob/master/docs/design.md
+
+Pillars of Docker Networking
+CNM - container network model
+libnetwork
+drivers
+
+CNM - 'theory and design'
+sandbox - "namespace", contains full network stack
+endpoint - network interface; eg: eth0
+network -
+
+libnetwork - the actual code of the CNM
+'control plane'
+
+Drivers
+'data plane'
+"local" drivers = native to docker
+"remote" drivers = 3rd party
+
+
+
+
+_______ basic /old ________
 #docker0 bridge
 
 see bridge connected devices

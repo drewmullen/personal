@@ -29,3 +29,9 @@ storing data outside the contain to increase persistence and sharing
 docker run -it -v /tmp-vol --name=<> <image>:<tag> <command (/bin/bash)>
 
 docker run -v </host/dir>:</container/dir>
+
+Try spinning up container and manually executing all commands
+
+trouble? start by spinning up LAST successful layer image
+
+network probs? manually set bridge ip in /etc/default/docker DOCKER_OPTS=10.10.10.2/24
