@@ -1,0 +1,42 @@
+docker history <container> lists layers in reverse order (top most layer first (furthest from base))
+
+docker run -d -p 80:80 webservers
+
+Instructions:
+
+RUN only runs at BUILD time, adds layers to images, used to install apps
+
+CMD only executes at RUN time, runs command in container at launch. overridden by CLI input... "docker run <args> <COMMAND>"
+# only 1 per file
+# exec form: JSON Array, will execute commands in contains that dont have a shell, no shell features (var expansion, special characters (&&, ||, >, etc))
+# shell form: prepends '/bin/sh -c', expressed exactly as shell command, var expansion, etc
+
+ENTRYPOINT
+CANNOT be overridden at runtime (docker run ...)
+however, receives command line arguments and intprets them as arguments
+
+the container behaves like a binary... anything we pass as an argument gets treated as an entry point instruction
+can setup a default argument set
+
+ENV var1="" var2=""
+VOLUME <dir>
+## if you remove the container without using "-v" it will NOT remove the vol... `docker rm -v <container>`
+
+docker logs -f <container> # acts like tail -f
+
+volumes - big idea:
+storing data outside the contain to increase persistence and sharing
+docker run -it -v /tmp-vol --name=<> <image>:<tag> <command (/bin/bash)>
+
+docker run -v </host/dir>:</container/dir>
+
+DOCKER LOGGING
+
+debug (all)
+info (info + error + fatal)
+error (error + fatal)
+fatal
+
+stop docker daemon
+
+docker -d -l debug &

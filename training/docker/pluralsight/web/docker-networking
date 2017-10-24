@@ -1,0 +1,12 @@
+#docker0 bridge
+
+see bridge connected devices
+yum install bridge-utils (windows? mac?)
+
+brctl show docker0
+
+/var/lib/docker/containers/<container>/hosts & resolv.conf
+
+hosts file is overlayed by new files
+
+docker port <container>
