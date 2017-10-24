@@ -1,0 +1,12 @@
+# have docker listen on port instead of socket
+docker -H 10.10.10.15:2375 -d &
+
+docker images are stored:
+/var/lib/docker/<storage driver>
+
+data stored:
+deb: /var/lib/docker/aufs/<container>/diff
+fed: ?? metadata stored at /var/lib/docker/overlay/<container id>/metadata
+
+
+exit container without killing: ctrl + p + q
