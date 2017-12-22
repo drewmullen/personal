@@ -1,4 +1,4 @@
-d.ocker machine: provisions docker hosts / engines
+docker machine: provisions docker hosts / engines
 docker compose: compose multi-container apps
 docker swarm: schedule containers over multiple docker engines
 
@@ -42,3 +42,6 @@ fatal
 stop docker daemon
 
 docker -d -l debug &
+
+MAC - view images
+screen ~/Library/Containers/com.docker.docker/Data/com.docker.driver.amd64-linux/tty

@@ -1,0 +1,40 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # General Vagrant VM configuration
+  config.vm.box = "geerlingguy/centos7"
+  config.ssh.insert_key = false
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  config.vm.provision "shell", path: "createAnsibleUser.sh"
+
+  if Vagrant.has_plugin?("vagrant-proxyconf")
+    config.proxy.http      = "http://PITC-Zscaler-Americas-Alpharetta3PR.proxy.corporate.ge.com:80"
+    config.proxy.https     = "http://PITC-Zscaler-Americas-Alpharetta3PR.proxy.corporate.ge.com:80"
+    config.proxy.no_proxy  = "localhost,127.0.0.1"
+  end
+
+  config.vm.provider :virtualbox do |v|
+    v. memory = 256
+    v.linked_clone = true
+  end
+
+  # app1 config
+  config.vm.define "app1" do |app|
+    app.vm.hostname = "orc-app1.dev"
+    app.vm.network :private_network, ip: "192.168.60.4"
+  end
+
+  config.vm.define "app2" do |app|
+    app.vm.hostname = "orc-app2.dev"
+    app.vm.network :private_network, ip: "192.168.60.5"
+  end
+
+  # db server
+  config.vm.define "db" do |db|
+    db.vm.hostname = "orc-db.dev"
+    db.vm.network :private_network, ip: "192.168.60.6"
+  end
+end
