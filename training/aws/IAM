@@ -1,0 +1,50 @@
+IAM 101
+
+Summary:
+
+Setup users and grant them a level of access to console
+
+Critical terms
+ - users - end users
+ - groups - collection of users under 1 set of permissions
+ - roles - roles can be assigned to resources
+ - policies - Policy documents are universal, made with JSON, and can be applied to users, groups, or roles
+
+Root account is created when you setup AWS account
+
+New users have access key ID & secret access key when first created
+
+secret access key is used for cli developer tools to interact with cloud
+: kRQKkMEXp60eMPJVwDrUVYQ/35h36S5KrvkETo5F
+password used for console acces
+: 9LA'RQbEz[}b
+
+
+STS - Security Token Service terms:
+federation: combining or joining a list of users in one domain to another existing domain
+identity broker: a service that allows you to take an identity from point a and join it to b
+identity store: services like AD, FB, Google
+identities: a user of a service
+
+scenario 1 * remember this one *
+1. develop an identity broker to communicate with LDAP and AWS STS
+2. identity broker always authenticates with LDAP first, THEN with AWS STS
+3. App the gets temporary access to AWS resource
+
+scenario 2
+1. develop an identity broker to communicate with LDAP and AWS STS.
+2. identity broker always authenticates with LDAP first, gets an IAM role associated with user
+3. application then authenticates with STS and assumes that IAM role
+4. application uses IAM role to interact with S3
+
+Federation -
+
+you can authenticate with AD using SAML
+authenticate first, then given temp access
+
+Web Identity Federation (FB, gmail, etc) -
+1. authenticate with FB
+2. FB provides an access token
+3. obtain temp security credentials from AWS
+4. AWS creates role using "call AssumeRoleWithWebIdentity"
+ARN (amazon resource name)

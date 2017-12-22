@@ -1,0 +1,83 @@
+services overview:
+
+Messaging
+ - SNS: simple notification services: way of sending messages; SMS, email.. can even send to http
+ - SQS: decoupleing application, a que or job
+ - SES: simple email service: email service
+
+Security & identity
+ - IAM: authenticate to AWS, create users, create groups, etc
+ - Inspector: agent to inspect VMs and report
+ - cert manager: free ssl certs for domain names
+ - directory service: use AD with AWS (connect AD to aws)
+ - WAF: web app firewall - protection to website
+ - artifacts: compliance documentation in AWS console (iso certs, etc)
+
+Storage
+ - S3: object based storage
+ - Glacier: archive files from S3
+ - EFS: (elastic file service) - file based storage, shareable
+ - storage gateway: connecting S3 to on-prem data center
+
+Mgmt tools
+ - cloud watch: used to monitor performance of assets (EC2, disk util)
+ - cloud formation: turning infrastructure into code
+ - cloud trail: records actions.. used for auditing
+ - opsworks: automating deployments using chef
+ - config: monitor for envs against predefined rules (making groups that shouldnt exist)
+ - service catalog: enterprise authorization for services... OSes... etc
+ - trusted advisor: automating cost optimization, performance opt, improve fault tolerance,
+     gives you tips by scanning env
+
+Databases
+ - RDS: Relational DBs MySQL, Maria, PostGres, ODB, Aurora
+ - DynamoDB: Non-relational DBs NOSQL
+ - Redshift: data warehouse solution
+ - Elasticache: cache data in the cloud. can cache db info to reduce db requests
+
+Networking & content delivery:
+ - VPC - virtual private cloud: virtual datacenter
+ - route 53: dns service (53 is the dns port)
+ - cloud front: part of CDN - caching centers
+ - direct connect: get a dedicated line into AWS
+
+Compute
+ - EC2: vms in the cloud
+ - ec2 container service: container mgmt and orchestration
+ - elastic beanstalk: will provision infrastrucature for code you pass it
+ - lambda: serverless responses for your applications
+ - lightsail: OOTB cloud - has full scale services
+
+AWS global infrastructure - availability zones, regions, edge locations
+ - region: a place where aws resources exist
+  - 14 regions & 38 availability zones
+  availability zone: a data center
+  edge location: CDN - content delivery network - huge cache centers for content delivery
+
+------------ extra ----------
+  Developer Tools
+   - code commit (github in aws)
+   - code build (compile your code)
+   - code deploy (deploy to ec2)
+   - code pipeline (code versioning)
+
+   Migration
+    - Snowball: can send physical disks to import large data to amazon (s3 or EBS)
+    - snowball NOW - you can have some AWS services on prem using the snowball appliance
+    - DMS: database migration services -
+    - SMS: service migration services - migrate on prem VMs to aws cloud
+
+    Application Services:
+     - step functions: visualizing what is going on inside microservices
+     - SWF (simple workflow): coordinating tasks (automated + human) using workflows
+     - API gateway: create, monitor, connect to backend data from your apps... you can create your own api
+     - app stream: stream desktop apps to users
+     - elastic transcoder: transcode videos for serving to multiple devices
+
+     Analytics
+      - Athena: run sql queries on S3 - turn flat files into DBs
+      - EMR: Elastic Map Reduce: big data processing using Hadoop
+      - cloud search / elastic search: create seach features
+      - kinesis: stream and analyze massive amounts of data
+      - data pipeline: move data from 1 place to another
+      - quick sight: business analytics, visuals and dashboards for data stored in AWS

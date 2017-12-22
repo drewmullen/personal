@@ -1,0 +1,59 @@
+Images are stacked in layers:
+layer 0 (image 0) - base image (ubuntu, centos, etc)
+layer 1 (image 1) - nginx
+layer 2 (image 2) - updates
+
+image layers get IDs - UUID
+layer images are merged (union mounts), hiding the previous layer contents
+
+# see image relationships (dependencies)
+dockviz images -t
+
+/var/lib/docker/<>/diff
+
+# create a new image from container
+docker commit <id> <new name>
+
+docker history --no-trunc <container / image>
+
+docker run --cpu-shares=1024
+docker run memory=1g
+
+#create connection to running container
+docker attach <container>
+
+docker stop / kill sends a sigterm posix signal (sigkill)
+## sends a kill to PID 1 (ONLY)
+
+# container that feels more like a real linux system
+phusion/baseimage
+
+# json of container
+docker inspect <container>
+
+# enter namespace
+nsenter -m -u -n -p -i -t <PID> /bin/bash
+docker-enter <container>
+docker exec -it /bin/bash
+
+# pushing images to docker hub
+from UI add repository
+docker push <user>/<image>:<tag>
+
+# private docker registry
+docker run -d -p 5000:5000 registry
+
+# tag image for private reg
+docker tag <container> <hostname>:5000/<image name>
+
+docker push <hostname>:5000/<image name>
+
+### for insecure transfers (non ssl)
+#ubuntu
+/etc/default/docker
+DOCKER_OPTS="--insecure-registry <hostname>:5000"
+
+# systemd (centos)
+/usr/lib/systemd/docker.service
+ExecStart=/usr/bin/start -d $OPTIONS $DOCKER_STORAGE_OPTIONS --insecure-registry <hostname>:5000"
+## restart docker

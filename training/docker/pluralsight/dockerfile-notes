@@ -1,0 +1,1 @@
+every RUN instruction creates a new image layer, commits it to the stack

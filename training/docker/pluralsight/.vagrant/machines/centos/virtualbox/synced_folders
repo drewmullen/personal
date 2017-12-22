@@ -1,1 +1,1 @@
-{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/Users/drewmullen/Documents/github/personal/training/docker/pluralsight","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/home/drewbuntu/Documents/github/personal/training/docker/pluralsight","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
