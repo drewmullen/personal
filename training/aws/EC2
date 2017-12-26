@@ -1,0 +1,19 @@
+1 subnet = 1 availability zone
+
+default EBS is delete on termination
+volume = virtual hard disk
+non encrypted by default
+
+security group = virtual firewall
+can restrict by IP
+stateful - anything you allow in you also allow out
+
+key pair:
+public key = padlock
+private key = key for padlock
+
+can put public key on multiple servers and use the same private key to open all the padlocks
+`ssh ec2-user@54.87.211.0 -i MyEC2KeyPair.pem`
+
+Lab 2:
+ec2-54-86-113-103.compute-1.amazonaws.com

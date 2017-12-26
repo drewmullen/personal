@@ -1,0 +1,9 @@
+---
+
+- name: apply common config
+  hosts: localhost
+  become: true
+
+  roles:
+    - common
+    - sudoers-file

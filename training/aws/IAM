@@ -37,6 +37,8 @@ scenario 2
 3. application then authenticates with STS and assumes that IAM role
 4. application uses IAM role to interact with S3
 
+API call AssumeRoleWithSAML
+
 Federation -
 
 you can authenticate with AD using SAML

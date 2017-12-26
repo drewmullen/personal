@@ -1,0 +1,36 @@
+EC2 101
+*pre-exam: read EC2 FAQ* Exam tips:
+know diff between pricing options
+spot instances: if you terminate the instance, you pay for the hour; if AWS terminates, you get hr for free
+EBS and EC2 instance types
+1 EBS vol can only mount to 1 EC2 instance, use EFS instead
+
+
+purchase options:
+on demand
+reserved: pay for period ahead of time for cheaper pricing
+spot: bid for pricing based on availability if you have flexible start / end times
+dedicated: dedicated physical server
+
+Instance types:
+Dr Mc GIFT PX
+
+d ensity
+r am optimized (DBs)
+m main choice
+c compute
+g graphics
+i iops
+f FPGA (field programable data arrays)
+t lowest cost
+p graphics intensive (think Pics)
+x extreme memory
+
+EBS: block based storage - create storage volumes and attach to EC2 instances
+ - create filesystem, run a db, etc..
+ - automatically replicated
+ General purpose SSDs (GP2) - up to 10,000 IOPS
+ Provisioned IOPS SSD(IO1) - IO intensive apps (dbs) (more than 10,000 IOPS)
+ Throughput Optimized HDD (ST1) -  big data, data warehouse, cannot boot from these
+ Cold HDD (SC1) - lowest cost for infrequently used data, non bootable
+ Standard - lowest cost for bootable EBS vol
